@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './layouts/Layout';
+import Main from './pages/Main';
+
+import ApporvalBoxManagement from './pages/Approval/ApporvalBoxManagement';
+import ApprovalLineManagement from './pages/Approval/ApprovalLineManagement';
+import ApprovalDoucumentManagement from './pages/Approval/ApprovalDoucumentManagement';
+import ApprovalStatemanagement from './pages/Approval/ApprovalStatemanagement';
+
+import CreateAccount from './pages/Account/CreateAccount';
+import DeleteAccount from './pages/Account/DeleteAccount';
+import UpdateAccount from './pages/Account/UpdateAccount';
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React TEST
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={ <Layout/> }>
+        
+          <Route index element={ <Main/> }/>
+
+          <Route path="account" >
+            <Route path="create" element={ <CreateAccount/> }/>
+            <Route path="update" element={ <DeleteAccount/> }/>
+            <Route path="delete" element={ <UpdateAccount/>}/>
+          </Route>
+
+          <Route path="approval" >
+            <Route path="approvalBox" element={ <ApporvalBoxManagement/> }/>
+            <Route path="approvalLine" element={ <ApprovalLineManagement/> }/>
+            <Route path="approvalDocument" element={ <ApprovalDoucumentManagement/>}/>
+            <Route path="approvalState" element={ <ApprovalStatemanagement/>}/>
+          </Route>
+
+        </Route>
+        
+      </Routes>
+    </BrowserRouter>
   );
 }
 
