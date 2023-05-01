@@ -34,6 +34,27 @@ function App() {
             <Route path="approvalState" element={ <ApprovalStatemanagement/>}/>
           </Route>
 
+          <Route path="pay" >
+            <Route path="temp1" element={ <Main/> }/>
+            <Route path="temp2" element={ <Main/> }/>
+            <Route path="temp3" element={ <Main/>}/>
+            <Route path="temp4" element={ <Main/>}/>
+          </Route>
+
+          <Route path="authority" >
+            <Route path="temp1" element={ <Main/> }/>
+            <Route path="temp2" element={ <Main/> }/>
+            <Route path="temp3" element={ <Main/>}/>
+            <Route path="temp4" element={ <Main/>}/>
+          </Route>
+
+          <Route path="system" >
+            <Route path="temp1" element={ <Main/> }/>
+            <Route path="temp2" element={ <Main/> }/>
+            <Route path="temp3" element={ <Main/>}/>
+            <Route path="temp4" element={ <Main/>}/>
+          </Route>
+
         </Route>
         
       </Routes>

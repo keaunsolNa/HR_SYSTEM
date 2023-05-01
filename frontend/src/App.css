@@ -1,11 +1,10 @@
 .TopNav {
   list-style-type : none;
-  float: left; 
+  display: inline-block;
   margin-left: 10%;
 }
 
 .MiddleNav {
-  position: fixed;
   list-style-type : none;
   margin-top: 10%;
   cursor: pointer;
@@ -18,14 +17,12 @@
 .BottomLine {
   list-style-type : none;
   position: fixed;
-  float: left; 
   margin-top: 10%;
 }
 
-.mainFrame {
-  margin-top: 10%;
-  color: red;
-  background-color: black;
+.mainBox {
+  margin-right: 10px;
+
 }
 
 .hovering {

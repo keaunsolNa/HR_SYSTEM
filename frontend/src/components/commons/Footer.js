@@ -4,7 +4,7 @@ function Footer() {
 
     return (
         <>
-            <div className='BottomLine'>
+            <div className='BottomLogo'>
                 <NavLink to='/'>
                     <>
                         <div className='inline-block'>

@@ -10,7 +10,7 @@ function ApprovalManagement() {
                         ];
     
     return (
-        <div>
+        <div className='mainFrame'>
             <h3>결재 관리</h3>
             {selectValue.map((link) => {
                 const { id, text, path } = link;
@@ -28,24 +28,6 @@ function ApprovalManagement() {
             })}
         </div>
     );
-
-    // return (
-    //     <div className='MiddleNav'>
-
-    //         {selectValue.map((element, index) => {
-    //             return (
-    //                 <MiddleVar
-    //                     key={index}
-    //                     isRootSelect={isRootSelect[index]}
-    //                     topViewClick={topViewClick}
-    //                     elementIndex={index}
-    //                     content={element}
-    //                     menuName = {menuName}
-    //                 />
-    //             );
-    //         })}
-    //     </div>
-    // );
 }
 
 export default ApprovalManagement;
