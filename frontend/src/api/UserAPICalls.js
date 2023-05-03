@@ -8,7 +8,7 @@ export function callLoginAPI(loginInfo) {
     return async (dispatch, getState) => {
         
         /* Api의 axios 처리 참조  */
-        const userList = await request('GET', `/api/userlogin/${loginInfo.id}`);
+        const userList = await request('GET', `/api/userlogin/userCheck/${loginInfo.id}`);
 
         /* id와 password 일치 여부 확인 - 서버에서 이루어져야 하는 로직 */
         /* 배열의 find 메소드 : 메서드는 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환 */
