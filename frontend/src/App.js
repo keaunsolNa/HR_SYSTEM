@@ -2,14 +2,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layouts/Layout';
 import Main from './pages/Main';
 
-import ApporvalBoxManagement from './pages/Approval/ApporvalBoxManagement';
-import ApprovalLineManagement from './pages/Approval/ApprovalLineManagement';
-import ApprovalDoucumentManagement from './pages/Approval/ApprovalDoucumentManagement';
-import ApprovalStatemanagement from './pages/Approval/ApprovalStatemanagement';
+import ApporvalBoxManagement from './pages/approval/ApporvalBoxManagement';
+import ApprovalLineManagement from './pages/approval/ApprovalLineManagement';
+import ApprovalDoucumentManagement from './pages/approval/ApprovalDoucumentManagement';
+import ApprovalStatemanagement from './pages/approval/ApprovalStatemanagement';
 
-import CreateAccount from './pages/Account/CreateAccount';
-import DeleteAccount from './pages/Account/DeleteAccount';
-import UpdateAccount from './pages/Account/UpdateAccount';
+import CreateAccount from './pages/account/CreateAccount';
+import DeleteAccount from './pages/account/DeleteAccount';
+import UpdateAccount from './pages/account/UpdateAccount';
+
+import UserLogin from './pages/common/userLogin';
 
 import "./App.css";
 
@@ -55,6 +57,9 @@ function App() {
             <Route path="temp4" element={ <Main/>}/>
           </Route>
 
+          <Route path="user">
+            <Route path="login" element={ <UserLogin/>}/>
+          </Route>
         </Route>
         
       </Routes>

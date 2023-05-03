@@ -6,12 +6,11 @@ import slidingLogo1 from "../asserts/sliding1.jpg"
 import slidingLogo2 from "../asserts/sliding2.jpg"
 import slidingLogo3 from "../asserts/sliding3.jpg"
 
-import ApprovalBoxManagement from "../pages/Approval/ApporvalBoxManagement"
-import ApprovalDoucumentManagement from "./Approval/ApprovalDoucumentManagement";
+import ApprovalBoxManagement from "./approval/ApporvalBoxManagement"
+import ApprovalDoucumentManagement from "./approval/ApprovalDoucumentManagement";
 
 function Main() {
 
-    const { id } = 111;
 
     const settings = {
         dots: true,

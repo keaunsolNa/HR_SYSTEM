@@ -1,6 +1,18 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { resetLoginUser } from "../../modules/userModules/UserLoginModule";
 import logo from "../../asserts/Linux.png"
 function Header() {
+
+    const loginStatus = !!localStorage.getItem('isLogin');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const logoutHandler = () => {
+        localStorage.removeItem('isLogin');
+        dispatch(resetLoginUser());
+        navigate('/');
+    }
 
     return (
         <>
@@ -13,6 +25,14 @@ function Header() {
                         <div className='inline-block vertical-align'>
                             <h3>HR-인사시스템</h3>
                         </div>
+
+                        { !loginStatus ? 
+                            (
+                                <NavLink to='user/login'>로그인</NavLink>
+                            ) : (
+                                <h5 onClick={ logoutHandler }><a href="/">로그아웃</a></h5>
+                            )
+                        }
                     </>
                 </NavLink>
             </div>

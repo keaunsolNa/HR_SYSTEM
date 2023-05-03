@@ -26,12 +26,10 @@ function CreateAccount() {
 
         let hireCdValue = 0;
         let orgCdValue = 0;
-
-        // eslint-disable-next-line
         switch(name) {
 
             case 'hireCd' :
-                // eslint-disable-next-line
+
                 switch(value) {
                     case '정규직 신입' : 
                         hireCdValue = 100;
@@ -52,12 +50,9 @@ function CreateAccount() {
                     case '외부 파견 인재' : 
                         hireCdValue = 500;
                         break;
-
-                  
                 }
             
-            // eslint-disable-next-line
-            case 'orgCd' : 
+            case 'orgCd' :
 
                 switch(value) {
 
@@ -79,10 +74,7 @@ function CreateAccount() {
 
                     case '사업5부' : 
                         orgCdValue = 500;
-                        break;         
-                        
-                    default : 
-                        break;
+                        break;                       
                 }
         }
 
@@ -170,6 +162,7 @@ function CreateAccount() {
                 <option>전무</option>
                 <option>부사장</option>
                 <option>사장</option>
+                <option>기타</option>
             </select>
             <br/>
             <br/>
