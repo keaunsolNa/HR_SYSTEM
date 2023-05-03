@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "richardwillis.vscode-gradle-extension-pack",
+        "vscjava.vscode-gradle"
+    ]
+}
