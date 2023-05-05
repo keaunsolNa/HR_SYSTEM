@@ -3,10 +3,8 @@ package com.hrsystem.hrsystem.controller.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,30 +16,26 @@ import com.hrsystem.hrsystem.model.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/userlogin")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
-public class LoginController {
+public class AccountController {
 
 	private final UserService userService;
 	
 	@Autowired
-	public LoginController(UserService userService) {
+	public AccountController(UserService userService) {
 		this.userService = userService;
 	}
 	
-	@GetMapping("/userCheck/{empId}")
-	public EmpBase adminModifyEmployee(@PathVariable String empId, Model mv) {
+	@PostMapping("/createTempUser")
+	public EmpBase adminModifyEmployee(EmpBase emp ) {
 		
-		EmpBase employee = userService.login(empId);
+		System.out.println(emp);
+		System.out.println(emp.getEmpName());
+//		System.out.println(empId);
+		EmpBase employee = new EmpBase();
 		
-		System.out.println("T");
 		return employee;
 	};
-	
-	
-	@PostMapping(value="/")
-	public String redirectMain(@AuthenticationPrincipal User userinfo, ModelAndView mv) {
-		return "redirect:/";
-	}
 	
 }

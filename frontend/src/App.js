@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Layout from './layouts/Layout';
 import Main from './pages/Main';
 
@@ -16,6 +17,18 @@ import UserLogin from './pages/common/userLogin';
 import "./App.css";
 
 function App() {
+  const loginStatus = !!localStorage.getItem('isLogin');
+
+  if(!loginStatus) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={ <UserLogin/> }/>
+       </Routes>
+      </BrowserRouter>
+    )
+  }
+
   return (
     <BrowserRouter>
       <Routes>
