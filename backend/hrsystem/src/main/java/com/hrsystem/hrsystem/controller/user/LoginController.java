@@ -34,7 +34,6 @@ public class LoginController {
 		
 		EmpBase employee = userService.login(empId);
 		
-		System.out.println("T");
 		return employee;
 	};
 	

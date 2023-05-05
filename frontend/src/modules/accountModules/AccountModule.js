@@ -4,17 +4,17 @@ import { createActions, handleActions } from "redux-actions";
 const initialState = {};
 
 /* 액션 타입 설정 */
-const REGIST_USER = 'approval/Get_APPROVAL';
-
+const CREATE_USER = 'account/CREATE_USER'
 /* 메뉴 관련 액션 함수 */
-export const { approval : { registUser }} = createActions({
-    [REGIST_USER]: (res) => ({ accountUser : res })
+export const { account : { createUser }} = createActions({
+    [CREATE_USER]: (res) => ({ regist : res }),
 });
 
 /* 리듀서 함수 */
 const menuReducer = handleActions(
     {   
-        [REGIST_USER]: (state, { payload }) => {
+       
+        [CREATE_USER]: (state, { payload }) => {
             return payload;
         }
     },
