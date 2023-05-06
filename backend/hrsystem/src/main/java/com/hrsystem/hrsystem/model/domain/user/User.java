@@ -1,20 +1,35 @@
 package com.hrsystem.hrsystem.model.domain.user;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.DynamicInsert;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "EMP_BASE")
-@DynamicInsert
-@Data
-public class EmpBase {
-	
+public class User implements UserDetails {
+
+	private static final long serialVersionUID = -4404887252879696483L;
+
 	@Id
 	@Column(name = "EMP_ID")
 	private Long empId;
@@ -69,10 +84,10 @@ public class EmpBase {
 	
 	@Column(name = "PAY_ORG_CD", nullable = true)
 	private String payOrgCd;
-
+	
 	@Column(name ="TEMP_YN")
 	private String tempYn;
-	
+
 	@Column(name = "HIRE_YMD", nullable = true)
 	private java.sql.Date hireYmd;
 
@@ -99,5 +114,45 @@ public class EmpBase {
 
 	@Column(name = "TZ_DATE")
 	private java.sql.Date tzDate;
+    
+	@OneToMany
+	@JoinColumn(name = "EMP_NO" , insertable = false, updatable = false)
+    private List<Role> roles;
+    
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getAuthorityCode() +""));
+        }
+        return authorities;
+	}
+
+    @Override
+    public String getUsername() {
+        return empName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
 
 }

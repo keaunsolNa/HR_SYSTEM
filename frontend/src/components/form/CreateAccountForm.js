@@ -1,8 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { callRegistMenuAPI } from '../../api/AccountAPICalls';
-
+import { createTempuserAPI } from '../../api/AccountAPICalls';
 function CreateAccount() {
 
     const result = useSelector(state => state.accountReducer);
@@ -10,91 +9,37 @@ function CreateAccount() {
 
     const [registUser, setRegistUser] = useState(
         {
-            userName: '',
-            hireCd: '정규직 신입',
-            posGrdCd: 100,
+            empName: '',
+            hireCd: '정규직신입',
+            posGrdCd: '사원',
             orgCd: '사업1부',
-            posCd: '사원'
+            posCd: '사원',
+            empKindCd : '내부인원',
+            genderCd : '남성',
 
         }
     );
 
     const onChangeHandler = (e) => {
 
-        let name = e.target.name;
-        let value = e.target.value;
-
-        let hireCdValue = 0;
-        let orgCdValue = 0;
-        switch(name) {
-
-            case 'hireCd' :
-
-                switch(value) {
-                    case '정규직 신입' : 
-                        hireCdValue = 100;
-                        break;
-
-                    case '정규직 경력' : 
-                        hireCdValue = 200;
-                        break;
-
-                    case '인턴' : 
-                        hireCdValue = 300;
-                        break;
-
-                    case '계약직' : 
-                        hireCdValue = 400;
-                        break;
-
-                    case '외부 파견 인재' : 
-                        hireCdValue = 500;
-                        break;
-                }
-            
-            case 'orgCd' :
-
-                switch(value) {
-
-                    case '사업1부' : 
-                        orgCdValue = 100;
-                        break;
-
-                    case '사업2부' : 
-                        orgCdValue = 200;
-                        break;
-
-                    case '사업3부' : 
-                        orgCdValue = 300;
-                        break;
-
-                    case '사업4부' : 
-                        orgCdValue = 400;
-                        break;
-
-                    case '사업5부' : 
-                        orgCdValue = 500;
-                        break;                       
-                }
-        }
+        const { name, value } = e.target;
 
         setRegistUser(
             {
                 ...registUser,
-                hireCd : hireCdValue,
-                orgCd : orgCdValue,
-                [name] : value
+                [name] : value,
             }
         );
 
     }
+
 
     useEffect(
         () => {
             /* 메뉴 등록 완료 확인 후 /menu로 이동 */
            
             if(result.regist) {
-                alert('사원 등록');
+                alert(`등록 사원의 ID 는 '${result.regist.empId}' 임시 패스워드는 '${result.regist.password}' 입니다.` )
             }
             
         },
@@ -103,7 +48,7 @@ function CreateAccount() {
 
       const onClickHandler = () => {
         /* registMenu에 대한 유효성 검사 후 호출 */
-        dispatch(callRegistMenuAPI(registUser));
+        dispatch(createTempuserAPI(registUser));
     }
 
     return (
@@ -113,27 +58,18 @@ function CreateAccount() {
             textAlign: 'left',
             marginTop: '50px',
           }}>
+
             <label>사원 이름 : </label>
-            <input type="text" name="userName" value={ registUser.userName } onChange={ onChangeHandler }/>
+            <input type="text" name="empName" value={ registUser.empName } onChange={ onChangeHandler }/>
             <br/>
             <br/>
             <label>입사 구분 : </label>
             <select name="hireCd" value={ registUser.hireCd } onChange={ onChangeHandler }>
-                <option>정규직 신입</option>
-                <option>정규직 경력</option>
+                <option>정규직신입</option>
+                <option>정규직경력</option>
                 <option>인턴</option>
                 <option>계약직</option>
                 <option>외부 파견 인재</option>
-            </select>
-            <br/>
-            <br/>
-            <label>직급 : </label>
-            <select name="posGrdCd" value={ registUser.posGrdCd } onChange={ onChangeHandler }>
-                <option>100</option>
-                <option>200</option>
-                <option>300</option>
-                <option>400</option>
-                <option>500</option>
             </select>
             <br/>
             <br/>
@@ -162,7 +98,20 @@ function CreateAccount() {
                 <option>전무</option>
                 <option>부사장</option>
                 <option>사장</option>
-                <option>기타</option>
+            </select>
+            <br/>
+            <br/>
+            <label>직원구분코드 : </label>
+            <select name="empKindCd" value={ registUser.empKindCd } onChange={ onChangeHandler }>
+                <option>외부인원</option>
+                <option>내부인원</option>
+            </select>
+            <br/>
+            <br/>
+            <label>성별 : </label>
+            <select name="genderCd" value={ registUser.genderCd } onChange={ onChangeHandler }>
+                <option>남성</option>
+                <option>여성</option>
             </select>
             <br/>
             <br/>

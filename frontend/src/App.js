@@ -9,6 +9,8 @@ import ApprovalDoucumentManagement from './pages/approval/ApprovalDoucumentManag
 import ApprovalStatemanagement from './pages/approval/ApprovalStatemanagement';
 
 import CreateAccount from './pages/account/CreateAccount';
+import TempAccount from './pages/account/TempAccount';
+import EmployeeList from './pages/account/EmployeeList'
 import DeleteAccount from './pages/account/DeleteAccount';
 import UpdateAccount from './pages/account/UpdateAccount';
 
@@ -38,8 +40,10 @@ function App() {
 
           <Route path="account" >
             <Route path="create" element={ <CreateAccount/> }/>
-            <Route path="update" element={ <DeleteAccount/> }/>
-            <Route path="delete" element={ <UpdateAccount/>}/>
+            <Route path="temp" element={ <TempAccount/>} />
+            <Route path=":id" element={ <EmployeeList/>} />
+            <Route path="update" element={ <UpdateAccount/> }/>
+            <Route path="delete" element={ <DeleteAccount/>}/>
           </Route>
 
           <Route path="approval" >
@@ -68,10 +72,6 @@ function App() {
             <Route path="temp2" element={ <Main/> }/>
             <Route path="temp3" element={ <Main/>}/>
             <Route path="temp4" element={ <Main/>}/>
-          </Route>
-
-          <Route path="user">
-            <Route path="login" element={ <UserLogin/>}/>
           </Route>
         </Route>
         

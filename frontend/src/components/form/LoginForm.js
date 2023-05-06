@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
 import { callLoginAPI } from '../../api/UserAPICalls';
 import { resetLoginUser } from "../../modules/userModules/UserLoginModule";
 
 
 function LoginForm() {
     
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const result = useSelector(state => state.userReducer);
     const loginStatus = !!localStorage.getItem('isLogin');
@@ -15,7 +13,7 @@ function LoginForm() {
     /* input 태그 입력 값 state 관리 */
     const [loginInfo, setLoginInfo] = useState(
         {
-            id : '',
+            empId : '',
             password : ''
         }
     );
@@ -46,13 +44,14 @@ function LoginForm() {
                 alert('아이디와 비밀번호를 확인해주세요');
                 setLoginInfo(
                     {
-                        id : '',
+                        empId : '',
                         password : ''
                     }
                 );
                 dispatch(resetLoginUser());    
             } else if(loginStatus){
-                navigate('/');
+                alert('로그인');
+                window.location.replace("/");
             } 
         }, // eslint-disable-next-line
         [result]
@@ -63,7 +62,7 @@ function LoginForm() {
             <>
                 <div>
                     <label>ID : </label>
-                    <input type="text" name="id" value={ loginInfo.id } onChange={ onChangeHandler }/> &nbsp;&nbsp;&nbsp;
+                    <input type="text" name="empId" value={ loginInfo.empId } onChange={ onChangeHandler }/> &nbsp;&nbsp;&nbsp;
                     <label>PASSWORD : </label>
                     <input type="password" name="password" value={ loginInfo.password } onChange={ onChangeHandler }/>
                     <button onClick={ onClickHandler }>로그인</button>

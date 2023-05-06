@@ -4,8 +4,9 @@ function EmployManagement() {
 
     const selectValue = [
                             { id: 1, text: "계정 생성", path: "/account/create"},
-                            { id: 2, text: "계정 수정", path: "/account/update"},
-                            { id: 3, text: "계정 삭제", path: "/account/delete"}
+                            { id: 2, text: "임시 계정", path: "/account/temp"},
+                            { id: 3, text: "계정 수정", path: "/account/update"},
+                            { id: 4, text: "계정 삭제", path: "/account/delete"}
                         ];
 
     return (

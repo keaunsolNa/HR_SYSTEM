@@ -2,6 +2,9 @@
 server:
   port: 8088
   
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+  
 ## 오라클 드라이버 설정
 spring:
   datasource:

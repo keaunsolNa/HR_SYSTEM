@@ -1,157 +1,21 @@
 
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createTempuserAPI } from '../../api/UserAPICalls';
+import { Navigate } from 'react-router-dom';
+import AccountRegistForm from '../../components/form/CreateAccountForm';
+
 function CreateAccount() {
 
-    const result = useSelector(state => state.accountReducer);
-    const dispatch = useDispatch();
-
-    const [registUser, setRegistUser] = useState(
-        {
-            empName: '',
-            hireCd: '정규직신입',
-            posGrdCd: '사원',
-            orgCd: '사업1부',
-            posCd: '사원',
-            empKindCd : '내부인원',
-            genderCd : '남성',
-
-        }
-    );
-
-    const onChangeHandler = (e) => {
-
-        const { name, value } = e.target;
-
-        setRegistUser(
-            {
-                ...registUser,
-                [name] : value,
-            }
-        );
-
+    const loginStatus = !!localStorage.getItem('isLogin');
+    if(!loginStatus) {
+        return <Navigate to="/login" replace={ true }/>
     }
 
-
-    useEffect(
-        () => {
-            /* 메뉴 등록 완료 확인 후 /menu로 이동 */
-           
-            console.log('createAccount')
-            console.log(result.regist)
-            if(result.regist) {
-                alert(`등록 사원의 ID 는 '${result.regist.empId}' 임시 패스워드는 '${result.regist.password}' 입니다.` )
-            }
-            
-        },
-        [result]
+    return(
+        <>  
+            <h1 className='titleH'>신규 사원 계정 등록</h1>
+            <AccountRegistForm/>
+        </>
     );
 
-      const onClickHandler = () => {
-        /* registMenu에 대한 유효성 검사 후 호출 */
-        dispatch(createTempuserAPI(registUser));
-    }
-
-    return (
-        <div style={{ 
-            fontsize: '24px',
-            marginLeft: '37%',
-            textAlign: 'left',
-            marginTop: '50px',
-          }}>
-
-            <label>사원 이름 : </label>
-            <input type="text" name="empName" value={ registUser.empName } onChange={ onChangeHandler }/>
-            <br/>
-            <br/>
-            <label>입사 구분 : </label>
-            <select name="hireCd" value={ registUser.hireCd } onChange={ onChangeHandler }>
-                <option>정규직신입</option>
-                <option>정규직경력</option>
-                <option>인턴</option>
-                <option>계약직</option>
-                <option>외부 파견 인재</option>
-            </select>
-            <br/>
-            <br/>
-            <label>직급 : </label>
-            <select name="posGrdCd" value={ registUser.posGrdCd } onChange={ onChangeHandler }>
-                <option>외부인원</option>
-                <option>인턴</option>
-                <option>계약직</option>
-                <option>사원</option>
-                <option>대리1년차</option>
-                <option>대리2년차</option>
-                <option>대리3년차</option>
-                <option>과장1년차</option>
-                <option>과장2년차</option>
-                <option>과장3년차</option>
-                <option>차장1년차</option>
-                <option>차장2년차</option>
-                <option>차장3년차</option>
-                <option>부장1년차</option>
-                <option>부장2년차</option>
-                <option>부장3년차</option>
-                <option>이사1년차</option>
-                <option>이사2년차</option>
-                <option>이사3년차</option>
-                <option>상무1년차</option>
-                <option>상무2년차</option>
-                <option>상무3년차</option>
-                <option>전무1년차</option>
-                <option>전무2년차</option>
-                <option>전무3년차</option>
-                <option>부사장</option>
-                <option>사장</option>
-            </select>
-            <br/>
-            <br/>
-            <label>부서 : </label>
-            <select name="orgCd" value={ registUser.orgCd } onChange={ onChangeHandler }>
-                <option>사업1부</option>
-                <option>사업2부</option>
-                <option>사업3부</option>
-                <option>사업4부</option>
-                <option>사업5부</option>
-            </select>
-            <br/>
-            <br/>
-            <label>직위 : </label>
-            <select name="posCd" value={ registUser.posCd } onChange={ onChangeHandler }>
-                <option>외부인원</option>
-                <option>인턴</option>
-                <option>계약직</option>
-                <option>사원</option>
-                <option>대리</option>
-                <option>과장</option>
-                <option>차장</option>
-                <option>부장</option>
-                <option>이사</option>
-                <option>상무</option>
-                <option>전무</option>
-                <option>부사장</option>
-                <option>사장</option>
-            </select>
-            <br/>
-            <br/>
-            <label>직원구분코드 : </label>
-            <select name="empKindCd" value={ registUser.empKindCd } onChange={ onChangeHandler }>
-                <option>외부인원</option>
-                <option>내부인원</option>
-            </select>
-            <br/>
-            <br/>
-            <label>성별 : </label>
-            <select name="genderCd" value={ registUser.genderCd } onChange={ onChangeHandler }>
-                <option>남성</option>
-                <option>여성</option>
-            </select>
-            <br/>
-            <br/>
-            <button onClick={ onClickHandler }>신규 사원 아이디 생성</button>
-        </div>
-    );
 }
 
 export default CreateAccount;

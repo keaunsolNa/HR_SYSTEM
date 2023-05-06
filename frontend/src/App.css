@@ -20,6 +20,11 @@
   margin-top: 10%;
 }
 
+.titleH {
+  text-align: center;
+  margin-top: 30px;
+}
+
 .mainBox {
   margin-right: 10px;
 
@@ -44,4 +49,10 @@
 .rootHeaderNav {
   float: left;
   margin-left: 15%;
+}
+
+.menuImageWrapper {
+  margin: 0 auto;
+  padding: 30px;
+  max-width: 1170px;
 }

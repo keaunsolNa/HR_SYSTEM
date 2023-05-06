@@ -1,46 +1,61 @@
 package com.hrsystem.hrsystem.controller.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.hrsystem.hrsystem.method.common.JwtTokenProvider;
 import com.hrsystem.hrsystem.model.domain.user.EmpBase;
-import com.hrsystem.hrsystem.model.service.user.UserService;
-
-import lombok.RequiredArgsConstructor;
+import com.hrsystem.hrsystem.model.domain.user.Role;
+import com.hrsystem.hrsystem.model.domain.user.User;
+import com.hrsystem.hrsystem.model.repository.user.LoginRepository;
 
 @RestController
 @RequestMapping("/api/userlogin")
-@RequiredArgsConstructor
 public class LoginController {
 
-	private final UserService userService;
+	private final JwtTokenProvider jwtTokenProvider;
+	private final PasswordEncoder passwordEncoder;
+	private final LoginRepository loginRepository;
 	
 	@Autowired
-	public LoginController(UserService userService) {
-		this.userService = userService;
-	}
+	public LoginController( PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, 
+							LoginRepository loginRepository) {
+		this.jwtTokenProvider = jwtTokenProvider;
+		this.passwordEncoder = passwordEncoder;
+		this.loginRepository = loginRepository;
+	}	
 	
-	@GetMapping("/userCheck/{empId}")
-	public EmpBase adminModifyEmployee(@PathVariable String empId, Model mv) {
+    
+	@PostMapping("/userCheck")
+	public String login(@RequestBody EmpBase user) {
 		
-		EmpBase employee = userService.login(empId);
+		User member = loginRepository.findById(user.getEmpId())
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
 		
-		return employee;
-	};
-	
-	
-	@PostMapping(value="/")
-	public String redirectMain(@AuthenticationPrincipal User userinfo, ModelAndView mv) {
-		return "redirect:/";
+		System.out.println("CHECK");
+		
+		System.out.println(member);
+//        if (!passwordEncoder.matches(user.getPassword(), member.getPassword())) {
+//            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+//        }
+        
+        System.out.println("AFTER REPO");
+        System.out.println(member.getRoles());
+        
+        List<String> roles = new ArrayList<>();
+        for (Role key : member.getRoles()) {
+			roles.add(key.getAuthorityCode() +"");
+		}
+        
+        return jwtTokenProvider.createToken(member.getEmpId()+"", roles);
+		
 	}
 	
 }

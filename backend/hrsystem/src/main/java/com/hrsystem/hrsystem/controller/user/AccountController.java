@@ -1,6 +1,9 @@
 package com.hrsystem.hrsystem.controller.user;
 
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/account")
 @RequiredArgsConstructor
 public class AccountController {
 
@@ -30,6 +33,7 @@ public class AccountController {
 		this.userService = userService;
 	}
 	
+	// 임시 계정 생성
 	@PostMapping("/createTempUser")
 	public EmpBase adminModifyEmployee(@RequestBody EmpBase request) {
 		
@@ -56,6 +60,9 @@ public class AccountController {
 		// 재직 여부 Set
 		employee.setInOffYn("Y");
 		
+		// 임시 계정 여부 Set
+		employee.setTempYn("Y");
+		
 		// modUserId, modDate, TzCd, tzDate Setting
 		employee = CommonInput.inputMMTT(employee);
 		
@@ -64,5 +71,15 @@ public class AccountController {
 		System.out.println(employee);
 		return request;
 	};
-	
+
+	@PostMapping("/searchUser")
+	public List<EmpBase> searchTempEmp(@RequestBody Map<String, String> empName) {
+		
+		String parameter = empName.get("empName");
+		List<EmpBase> empBaseList = new ArrayList<>();
+		
+		empBaseList = userService.selectEmployeeWithEmployeeName(parameter);
+		
+		return empBaseList;
+	}
 }

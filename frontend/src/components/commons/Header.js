@@ -1,17 +1,18 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { resetLoginUser } from "../../modules/userModules/UserLoginModule";
 import logo from "../../asserts/Linux.png"
 function Header() {
 
     const loginStatus = !!localStorage.getItem('isLogin');
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const logoutHandler = () => {
         localStorage.removeItem('isLogin');
+        localStorage.removeItem('jwtAuthToken');
         dispatch(resetLoginUser());
-        navigate('/');
+        alert('로그아웃')
+        window.location.replace("/");
     }
 
     return (
@@ -30,7 +31,7 @@ function Header() {
                             (
                                 <NavLink to='user/login'>로그인</NavLink>
                             ) : (
-                                <h5 onClick={ logoutHandler }><a href="/">로그아웃</a></h5>
+                                <h5 onClick={ logoutHandler }> <NavLink to='user/login'>로그아웃</NavLink></h5>
                             )
                         }
                     </>
