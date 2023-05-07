@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { callLoginAPI } from '../../api/UserAPICalls';
 import { resetLoginUser } from "../../modules/userModules/UserLoginModule";
 
-
 function LoginForm() {
     
     const dispatch = useDispatch();
@@ -51,6 +50,7 @@ function LoginForm() {
                 dispatch(resetLoginUser());    
             } else if(loginStatus){
                 alert('로그인');
+
                 window.location.replace("/");
             } 
         }, // eslint-disable-next-line

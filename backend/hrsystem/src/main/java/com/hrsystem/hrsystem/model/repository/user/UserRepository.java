@@ -17,6 +17,6 @@ public interface UserRepository extends JpaRepository<EmpBase, Long> {
     Long getCurrentSeqValue();
 
     // Emp 계정 조회
-	List<EmpBase> findAllByEmpNameLike(String string);
+	List<EmpBase> findAllByTempYnAndEmpNameLike(String temp, String string);
 
 }

@@ -8,7 +8,7 @@ export const LOGIN = 'user/LOGIN';
 export const RESET_LOGIN_USER = 'user/RESET_LOGIN_USER';
 
 /* 유저 관련 액션 함수 */
-export const { user : { login, resetLoginUser, createUser }} = createActions({
+export const { user : { login, resetLoginUser }} = createActions({
     [LOGIN]: (res) => ({ res }),
     [RESET_LOGIN_USER]: (res = initialState) => ({ res }),
 });

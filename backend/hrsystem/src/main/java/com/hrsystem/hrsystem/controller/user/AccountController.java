@@ -76,6 +76,9 @@ public class AccountController {
 	public List<EmpBase> searchTempEmp(@RequestBody Map<String, String> empName) {
 		
 		String parameter = empName.get("empName");
+		if(parameter.equals("")) parameter ="%";
+		else parameter += "%";
+		
 		List<EmpBase> empBaseList = new ArrayList<>();
 		
 		empBaseList = userService.selectEmployeeWithEmployeeName(parameter);

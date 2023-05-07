@@ -13,8 +13,9 @@ export function callLoginAPI(loginInfo) {
         const userList = await request('POST', `/api/userlogin/userCheck`, loginInfo);
 
         if(userList !== '' && userList !== undefined) {
-            localStorage.jwtAuthToken = userList;
+
             dispatch(login(true));
+            localStorage.jwtAuthToken = userList;
         } else {
             dispatch(login(false));
         }

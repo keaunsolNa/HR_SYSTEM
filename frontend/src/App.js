@@ -10,7 +10,6 @@ import ApprovalStatemanagement from './pages/approval/ApprovalStatemanagement';
 
 import CreateAccount from './pages/account/CreateAccount';
 import TempAccount from './pages/account/TempAccount';
-import EmployeeList from './pages/account/EmployeeList'
 import DeleteAccount from './pages/account/DeleteAccount';
 import UpdateAccount from './pages/account/UpdateAccount';
 
@@ -41,7 +40,6 @@ function App() {
           <Route path="account" >
             <Route path="create" element={ <CreateAccount/> }/>
             <Route path="temp" element={ <TempAccount/>} />
-            <Route path=":id" element={ <EmployeeList/>} />
             <Route path="update" element={ <UpdateAccount/> }/>
             <Route path="delete" element={ <DeleteAccount/>}/>
           </Route>

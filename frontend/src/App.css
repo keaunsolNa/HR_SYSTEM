@@ -25,15 +25,45 @@
   margin-top: 30px;
 }
 
-.mainBox {
+.MainBox {
   margin-right: 10px;
+  height: 1000px;
+  width: 100%;
+}
 
+.searchBox {
+  margin-top: 50px;
+}
+
+.Table {
+  margin-top: 20px;
+  width: 100%;
 }
 
 .hovering {
   margin-top: 10%;
   cursor: pointer;
   background-color: blue;
+}
+
+.Title {
+  font-size: xx-large;
+  text-align: center;
+  background-color: aquamarine;
+}
+
+.Thead {
+  font-size: large;
+  margin-bottom: 100px;
+  margin-left: 100px;
+  background-color: #00d82c;
+  color: #fff;
+}
+
+.Tr{
+  font-size: medium;
+  text-align: center;
+  background-color: rgb(13, 176, 182);
 }
 
 .inline-block {

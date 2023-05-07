@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<EmpBase> selectEmployeeWithEmployeeName(String string) {
 		
-		List<EmpBase> empList = userRepositroy.findAllByEmpNameLike(string);
+		List<EmpBase> empList = userRepositroy.findAllByTempYnAndEmpNameLike("Y", string);
 		return empList;
 	}
 }

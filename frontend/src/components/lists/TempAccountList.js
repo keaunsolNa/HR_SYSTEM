@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { searchTempUser } from "../../api/AccountAPICalls";
-
+import Board from "../Table/Employee/Board"
 import UserItem from '../../components/items/userItem';
 
 function TempAccountList() {
@@ -13,7 +13,7 @@ function TempAccountList() {
     
     const [searchValue, setSearchValue] = useState(
         {
-            empName: '%'
+            empName: ''
         }
     );
 
@@ -51,18 +51,16 @@ function TempAccountList() {
         []
     );
     
+    console.log(userList)
     return (
         userList && (
-            <div>
-                <input type="text" name="empName" value={ searchValue.empName } onChange={ onChangeHandler }/>
-                <div className="accountBox">
-                    <table>
-                        <thead> 
-                            <tr>
-                                { userList.map(emp => <UserItem key={ emp.empId } emp={ emp }/>) }
-                            </tr>
-                        </thead>
-                    </table>
+            <div className='MainBox'>
+                <div className='searchBox'>
+                    <label>검색 (이름) : </label>
+                    <input type="text" name="empName" value={ searchValue.empName } onChange={ onChangeHandler }/>
+                </div>
+                <div className='Table'>
+                    <Board info={userList.map(emp => <UserItem key={ emp.empId } emp={ emp }/>) } />
                 </div>
             </div>
         )
