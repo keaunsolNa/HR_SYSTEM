@@ -2,6 +2,7 @@ package com.hrsystem.hrsystem.controller.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,15 +40,10 @@ public class LoginController {
 		User member = loginRepository.findById(user.getEmpId())
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
 		
-		System.out.println("CHECK");
-		
 		System.out.println(member);
 //        if (!passwordEncoder.matches(user.getPassword(), member.getPassword())) {
 //            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
 //        }
-        
-        System.out.println("AFTER REPO");
-        System.out.println(member.getRoles());
         
         List<String> roles = new ArrayList<>();
         for (Role key : member.getRoles()) {
@@ -58,4 +54,18 @@ public class LoginController {
 		
 	}
 	
+	@PostMapping("getLoginUser") 
+	public String getUserId(@RequestBody Map<String, String> token) {
+		
+		String userId;
+		try {
+			userId = jwtTokenProvider.getUserPk(token.get("jwtAuthToken"));
+		} catch(io.jsonwebtoken.ExpiredJwtException e) {
+			userId = "토큰 기한 만료. 다시 로그인 해 주세요";
+		}
+		
+		return userId;
+	}
+	
+
 }

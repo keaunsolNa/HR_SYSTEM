@@ -1,5 +1,5 @@
 import { request } from "./Api"; 
-import { searchUser, createUser } from "../modules/accountModules/AccountModule";
+import { searchUser, createUser, getUser } from "../modules/accountModules/AccountModule";
 
 
 // 임시 회원 계정 생성 함수
@@ -20,5 +20,25 @@ export function searchTempUser(empName){
         const result = await request('POST', '/api/account/searchUser', empName);
 
         dispatch(searchUser(result))
+    }
+}
+
+// 사원 정보 수정 유저 정보 가져오기
+export function callGetUser(id) {
+
+    return async (dispatch, getState) => {
+
+        const user = await request('POST', '/api/account/getUser', id);
+        dispatch(getUser(user));
+
+    }
+}
+
+export function updateUser(employee) {
+
+    return async (dispatch, getState) => {
+
+        const user = await request('POST', '/api/account/updateUser', employee);
+        dispatch(updateUser(user));
     }
 }

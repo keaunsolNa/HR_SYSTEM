@@ -1,6 +1,7 @@
 package com.hrsystem.hrsystem.model.service.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,27 @@ public class UserServiceImpl implements UserService{
 		
 		List<EmpBase> empList = userRepositroy.findAllByTempYnAndEmpNameLike("Y", string);
 		return empList;
+	}
+
+	// 사원 정보 가져오기
+	@Override
+	public Optional<EmpBase> getUser(String userId) {
+		
+		Optional<EmpBase> employee = userRepositroy.findById(Long.parseLong(userId));
+		
+		return employee;
+	}
+
+	// 사원 정보 수정
+	@Override
+	public Optional<EmpBase> updateUser(EmpBase employee) {
+
+		Optional<EmpBase> updateUser = userRepositroy.findById(employee.getEmpId());
+		
+		updateUser.ifPresent(selectUser -> {
+			
+		});
+				
+		return updateUser;
 	}
 }

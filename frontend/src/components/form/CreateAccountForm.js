@@ -52,12 +52,7 @@ function CreateAccount() {
     }
 
     return (
-        <div style={{ 
-            fontsize: '24px',
-            marginLeft: '37%',
-            textAlign: 'left',
-            marginTop: '50px',
-          }}>
+        <div className='commonForm'>
 
             <label>사원 이름 : </label>
             <input type="text" name="empName" value={ registUser.empName } onChange={ onChangeHandler }/>
@@ -115,7 +110,8 @@ function CreateAccount() {
             </select>
             <br/>
             <br/>
-            <button onClick={ onClickHandler }>신규 사원 아이디 생성</button>
+            <label> 신규 사원 아이디 생성 : </label>
+            <button onClick={ onClickHandler }>Click </button>
         </div>
     );
 }

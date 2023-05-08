@@ -46,6 +46,24 @@
   background-color: blue;
 }
 
+.commonForm {
+  font-size: '24px';
+  text-align: 'center';
+}
+
+.commonForm > label {
+  margin-left: 37%;
+}
+
+.commonForm > button {
+
+  background-color: #7fb1bf;
+  border: 0;
+  padding: 6px 15px;
+  text-align: 'center';
+  color: white;
+}
+
 .Title {
   font-size: xx-large;
   text-align: center;

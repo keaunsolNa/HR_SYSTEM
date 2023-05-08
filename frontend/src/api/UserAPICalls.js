@@ -1,5 +1,5 @@
 import { request } from "./Api"; 
-import { login } from "../modules/userModules/UserLoginModule";
+import { login, getLoginUser } from "../modules/userModules/UserLoginModule";
 
 /* 로그인 함수  */
 export function callLoginAPI(loginInfo) {
@@ -22,3 +22,18 @@ export function callLoginAPI(loginInfo) {
 
     }
 }
+
+// Token에서 UserId 가져오기
+export function callGetUserId(token) {
+
+    return async (dispatch, getState) => {
+
+        const userId = await request('POST', '/api/userlogin/getLoginUser', token);
+        
+        console.log(userId)
+
+        dispatch(getLoginUser(userId))
+    }
+}
+
+
