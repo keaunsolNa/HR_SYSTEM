@@ -1,5 +1,5 @@
 import { request } from "./Api"; 
-import { searchUser, createUser, getUser } from "../modules/accountModules/AccountModule";
+import { searchUser, createUser, getUser, updateUser } from "../modules/accountModules/AccountModule";
 
 
 // 임시 회원 계정 생성 함수
@@ -29,16 +29,21 @@ export function callGetUser(id) {
     return async (dispatch, getState) => {
 
         const user = await request('POST', '/api/account/getUser', id);
+        
         dispatch(getUser(user));
 
+        return user;
     }
 }
 
-export function updateUser(employee) {
+// 사원 정보 수정
+export function callUpdateUser(employee) {
 
     return async (dispatch, getState) => {
 
         const user = await request('POST', '/api/account/updateUser', employee);
+
+        console.log(user)
         dispatch(updateUser(user));
     }
 }

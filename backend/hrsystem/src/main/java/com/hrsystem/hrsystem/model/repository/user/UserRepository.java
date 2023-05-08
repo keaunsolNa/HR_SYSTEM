@@ -19,4 +19,7 @@ public interface UserRepository extends JpaRepository<EmpBase, Long> {
     // Emp 계정 조회
 	List<EmpBase> findAllByTempYnAndEmpNameLike(String temp, String string);
 
+	// EmpBase 객체 조회
+	EmpBase findByEmpId(Long empId);
+
 }

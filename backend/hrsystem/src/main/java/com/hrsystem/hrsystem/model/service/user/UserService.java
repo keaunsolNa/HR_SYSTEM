@@ -15,5 +15,5 @@ public interface UserService {
 
 	Optional<EmpBase> getUser(String userId);
 
-	Optional<EmpBase> updateUser(EmpBase employee);
+	EmpBase updateUser(EmpBase employee);
 }

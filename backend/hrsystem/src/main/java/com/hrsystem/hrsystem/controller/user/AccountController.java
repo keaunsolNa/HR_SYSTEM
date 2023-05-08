@@ -98,11 +98,11 @@ public class AccountController {
 	}
 	
 	@PostMapping("updateUser") 
-	public Optional<EmpBase> updateUser(@RequestBody EmpBase employee) {
+	public EmpBase updateUser(@RequestBody EmpBase employee) {
 		
 		System.out.println(employee);
 		
-		Optional<EmpBase> updateEmployee = userService.updateUser(employee);
+		EmpBase updateEmployee = userService.updateUser(employee);
 		
 		return updateEmployee;
 		

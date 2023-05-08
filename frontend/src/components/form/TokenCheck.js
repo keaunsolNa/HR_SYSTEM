@@ -10,7 +10,7 @@ function TokenCheck() {
     const dispatch = useDispatch();
 
     console.log(userId)
-    const [jwtAuthToken, setJwtAuthToken] = useState(
+    const [jwtAuthToken] = useState(
         {
             jwtAuthToken: localStorage.getItem("jwtAuthToken"),
         }
