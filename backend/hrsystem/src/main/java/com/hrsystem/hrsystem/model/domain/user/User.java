@@ -1,40 +1,35 @@
 package com.hrsystem.hrsystem.model.domain.user;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
-@Table(name = "EMP_BASE")
-public class User implements UserDetails {
+@Table(name="EMP_BASE")
+@Getter
+@Setter
+@NoArgsConstructor
+public class User implements Serializable {
 
 	private static final long serialVersionUID = -4404887252879696483L;
-
+	
 	@Id
 	@Column(name = "EMP_ID")
 	private Long empId;
 
-	@Column(name = "PASSWORD")
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
 	@Column(name = "COMPANY_CD")
@@ -69,9 +64,6 @@ public class User implements UserDetails {
 	
 	@Column(name = "POS_CD", nullable = true)
 	private String posCd;
-	
-	@Column(name = "YEAR_CD", nullable = true)
-	private String yearCd;
 	
 	@Column(name = "ORG_CD", nullable = true)
 	private String orgCd;
@@ -114,45 +106,13 @@ public class User implements UserDetails {
 
 	@Column(name = "TZ_DATE")
 	private java.sql.Date tzDate;
+
+    @ManyToMany(cascade=CascadeType.MERGE) 
+    @JoinTable(
+            name="ROLE",
+            joinColumns={@JoinColumn(name="EMP_NO", referencedColumnName="EMP_ID")},
+            inverseJoinColumns={@JoinColumn(name="AUTHORITY_CODE", referencedColumnName="AUTHORITY_CODE")})
+    private List<Authority> roles;
     
-	@OneToMany
-	@JoinColumn(name = "EMP_NO" , insertable = false, updatable = false)
-    private List<Role> roles;
-    
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getAuthorityCode() +""));
-        }
-        return authorities;
-	}
-
-    @Override
-    public String getUsername() {
-        return empName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-
 
 }

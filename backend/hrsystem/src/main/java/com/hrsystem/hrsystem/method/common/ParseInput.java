@@ -47,6 +47,14 @@ public class ParseInput {
 			case  "남성" : emp.setGenderCd("M"); break;
 			case  "여성" : emp.setGenderCd("F"); break;
 		}
+		
+		switch(emp.getJobCd()) {
+			case "사원" : emp.setJobCd("100"); break;
+			case "보안담당자" : emp.setJobCd("200"); break;
+			case "인사담당자" : emp.setJobCd("300"); break;
+			case "재정담당자" : emp.setJobCd("400"); break;
+			case "사장" : emp.setJobCd("500"); break;
+		}
 		return emp;
 	}
 }

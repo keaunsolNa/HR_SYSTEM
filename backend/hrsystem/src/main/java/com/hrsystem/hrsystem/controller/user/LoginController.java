@@ -1,10 +1,10 @@
 package com.hrsystem.hrsystem.controller.user;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,26 +12,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hrsystem.hrsystem.method.common.JwtTokenProvider;
+import com.hrsystem.hrsystem.model.domain.user.Authority;
 import com.hrsystem.hrsystem.model.domain.user.EmpBase;
-import com.hrsystem.hrsystem.model.domain.user.Role;
 import com.hrsystem.hrsystem.model.domain.user.User;
 import com.hrsystem.hrsystem.model.repository.user.LoginRepository;
+import com.hrsystem.hrsystem.model.service.user.UserService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/userlogin")
+@RequiredArgsConstructor
 public class LoginController {
 
 	private final JwtTokenProvider jwtTokenProvider;
 	private final PasswordEncoder passwordEncoder;
 	private final LoginRepository loginRepository;
+	private final UserService userService;
 	
-	@Autowired
-	public LoginController( PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, 
-							LoginRepository loginRepository) {
-		this.jwtTokenProvider = jwtTokenProvider;
-		this.passwordEncoder = passwordEncoder;
-		this.loginRepository = loginRepository;
-	}	
 	
     
 	@PostMapping("/userCheck")
@@ -45,23 +43,42 @@ public class LoginController {
 //            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
 //        }
         
-        List<String> roles = new ArrayList<>();
-        for (Role key : member.getRoles()) {
-			roles.add(key.getAuthorityCode() +"");
-		}
+		List<Authority> roles = member.getRoles();
         
         return jwtTokenProvider.createToken(member.getEmpId()+"", roles);
 		
 	}
 	
 	@PostMapping("getLoginUser") 
-	public String getUserId(@RequestBody Map<String, String> token) {
+	public Object getUserId(@RequestBody String token) {
+
+		System.out.println("GetLoginUser");
+		Map<String, String> userId = new HashMap<>();
 		
-		String userId;
+		System.out.println(token);
+
 		try {
-			userId = jwtTokenProvider.getUserPk(token.get("jwtAuthToken"));
+			
+			String id = jwtTokenProvider.getUserPk(token);
+			userId.put("SUCCESS", id);
+			
 		} catch(io.jsonwebtoken.ExpiredJwtException e) {
-			userId = "토큰 기한 만료. 다시 로그인 해 주세요";
+			
+			userId.put("ERROR", "토큰 기한 만료. 다시 로그인 해 주세요");
+			
+		} catch(Exception e) {
+			
+			e.printStackTrace();
+			userId.put("ERROR", e.toString());
+			
+		}
+		
+		if(userId.containsKey("SUCCESS")) {
+			
+			Optional<EmpBase> employee = userService.getUser(userId.get("SUCCESS"));
+			
+			return employee;
+			
 		}
 		
 		return userId;

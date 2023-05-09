@@ -30,6 +30,7 @@ export function callGetUser(id) {
 
         const user = await request('POST', '/api/account/getUser', id);
         
+        console.log(user)
         dispatch(getUser(user));
 
         return user;

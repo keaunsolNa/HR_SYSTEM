@@ -1,22 +1,23 @@
 import UpdateAccountForm from "../../components/form/UpdateAccountForm";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callGetUser } from "../../api/AccountAPICalls"
+import { callGetUserId } from "../../api/UserAPICalls";
 
 function UpdateAccount() {
 
     const userId = localStorage.getItem('jwtAuthToken');
 
-    const result = useSelector(state => state.accountReducer);
-    const user = result.getUser;
+    const result = useSelector(state => state.userReducer);
+    const user = result.getLoginUser;
 
     const dispatch = useDispatch();
 
     useEffect(
         () => {
 
-            dispatch(callGetUser(userId));
+            dispatch(callGetUserId(userId));
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         []
     );
 

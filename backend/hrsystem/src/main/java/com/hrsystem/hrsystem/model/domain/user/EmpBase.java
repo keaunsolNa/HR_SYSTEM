@@ -1,5 +1,6 @@
 package com.hrsystem.hrsystem.model.domain.user;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -55,9 +56,6 @@ public class EmpBase {
 	@Column(name = "POS_CD", nullable = true)
 	private String posCd;
 	
-	@Column(name = "YEAR_CD", nullable = true)
-	private String yearCd;
-	
 	@Column(name = "ORG_CD", nullable = true)
 	private String orgCd;
 	
@@ -99,5 +97,6 @@ public class EmpBase {
 
 	@Column(name = "TZ_DATE")
 	private java.sql.Date tzDate;
+	
 
 }

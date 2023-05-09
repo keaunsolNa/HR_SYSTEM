@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.hrsystem.hrsystem.model.domain.user.EmpBase;
+import com.hrsystem.hrsystem.model.domain.user.User;
 
 public interface UserService {
 
@@ -15,5 +16,5 @@ public interface UserService {
 
 	Optional<EmpBase> getUser(String userId);
 
-	EmpBase updateUser(EmpBase employee);
+	Optional<User> updateUser(EmpBase employee);
 }

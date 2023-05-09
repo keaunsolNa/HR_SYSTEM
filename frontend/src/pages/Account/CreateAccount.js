@@ -1,13 +1,22 @@
-
-import { Navigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { callGetUserId } from "../../api/UserAPICalls";
 import AccountRegistForm from '../../components/form/CreateAccountForm';
 
 function CreateAccount() {
 
-    const loginStatus = !!localStorage.getItem('isLogin');
-    if(!loginStatus) {
-        return <Navigate to="/login" replace={ true }/>
-    }
+    const userId = localStorage.getItem('jwtAuthToken');
+
+    const dispatch = useDispatch();
+
+    useEffect(
+        () => {
+
+            dispatch(callGetUserId(userId));
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        []
+    );
 
     return(
         <>  

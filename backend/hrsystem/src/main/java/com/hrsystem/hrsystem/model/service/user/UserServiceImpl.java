@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrsystem.hrsystem.model.domain.user.EmpBase;
+import com.hrsystem.hrsystem.model.domain.user.User;
 import com.hrsystem.hrsystem.model.repository.user.UserRepository;
 
 @Service
@@ -55,14 +56,14 @@ public class UserServiceImpl implements UserService{
 
 	// 사원 정보 수정
 	@Override
-	public EmpBase updateUser(EmpBase employee) {
+	public Optional<User> updateUser(EmpBase employee) {
 
-		EmpBase updateUser = userRepositroy.findByEmpId(employee.getEmpId());
-		
-		if(updateUser.getTempYn() == "Y") updateUser.setTempYn("N");
+		if(employee.getTempYn().equals("Y")) employee.setTempYn("N");
 		
 		userRepositroy.save(employee);
-				
+
+		Optional<User> updateUser = userRepositroy.findByEmpId(employee.getEmpId());
+		
 		return updateUser;
 	}
 }

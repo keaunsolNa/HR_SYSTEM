@@ -12,7 +12,6 @@ function UpdateAccountForm({ data }) {
         birthYmd: '',
         careerNum: '',
         ctzNo : '',
-        dutyCd: '',
         email: '',
         empName: '',
         empNo: '',
@@ -40,7 +39,8 @@ function UpdateAccountForm({ data }) {
 
         dispatch(callUpdateUser(registUser));
         
-        alert('!')
+        alert('사원 정보 변경 완료.')
+        window.location.replace("/");
     }
 
     useEffect(() => {
@@ -69,10 +69,6 @@ function UpdateAccountForm({ data }) {
                 <br/>
                 <label> 주민 번호: </label>
                 <input type="text" name="ctzNo" value={ registUser.ctzNo || '' } onChange={ onChangeHandler }  />
-                <br/>
-                <br/>
-                <label> 직책 : </label>
-                <input type="text" name="dutyCd" value={ registUser.dutyCd || '' } onChange={ onChangeHandler }  />
                 <br/>
                 <br/>
                 <label> 이메일: </label>

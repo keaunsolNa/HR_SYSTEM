@@ -17,6 +17,7 @@ import com.hrsystem.hrsystem.method.common.JwtTokenProvider;
 import com.hrsystem.hrsystem.method.common.ParseInput;
 import com.hrsystem.hrsystem.method.common.RandomPasswordGenerator;
 import com.hrsystem.hrsystem.model.domain.user.EmpBase;
+import com.hrsystem.hrsystem.model.domain.user.User;
 import com.hrsystem.hrsystem.model.service.user.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -98,11 +99,11 @@ public class AccountController {
 	}
 	
 	@PostMapping("updateUser") 
-	public EmpBase updateUser(@RequestBody EmpBase employee) {
+	public Optional<User> updateUser(@RequestBody EmpBase employee) {
 		
 		System.out.println(employee);
 		
-		EmpBase updateEmployee = userService.updateUser(employee);
+		Optional<User> updateEmployee = userService.updateUser(employee);
 		
 		return updateEmployee;
 		

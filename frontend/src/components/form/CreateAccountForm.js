@@ -15,6 +15,7 @@ function CreateAccount() {
             orgCd: '사업1부',
             posCd: '사원',
             empKindCd : '내부인원',
+            jobCd : '사원',
             genderCd : '남성',
 
         }
@@ -100,6 +101,16 @@ function CreateAccount() {
             <select name="empKindCd" value={ registUser.empKindCd } onChange={ onChangeHandler }>
                 <option>외부인원</option>
                 <option>내부인원</option>
+            </select>
+            <br/>
+            <br/>
+            <label> 직무코드 : </label>
+            <select name="jobCd" value={ registUser.jobCd } onChange={ onChangeHandler }>
+                <option>사원</option>
+                <option>보안담당자</option>
+                <option>인사담당자</option>
+                <option>재정담당자</option>
+                <option>사장</option>
             </select>
             <br/>
             <br/>

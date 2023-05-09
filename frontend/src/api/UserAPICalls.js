@@ -29,9 +29,14 @@ export function callGetUserId(token) {
     return async (dispatch, getState) => {
 
         const userId = await request('POST', '/api/userlogin/getLoginUser', token);
-        
-        console.log(userId)
 
+        if(userId.hasOwnProperty('ERROR')) {
+            alert(userId.ERROR);
+            localStorage.clear();
+            window.location.replace("/");
+
+        }
+        
         dispatch(getLoginUser(userId))
     }
 }

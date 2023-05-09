@@ -39,10 +39,6 @@ const userReducer = handleActions(
 
         [GET_LOGIN_USER]: (state, { payload  }) => {
 
-            if(payload.getLoginUser !== '토큰 기한 만료. 다시 로그인 해 주세요') {
-                localStorage.setItem("userId", payload.getLoginUser);
-            }
-
             return payload;
         },
 
