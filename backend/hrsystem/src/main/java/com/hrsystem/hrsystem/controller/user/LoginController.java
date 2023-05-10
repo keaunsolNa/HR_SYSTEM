@@ -38,12 +38,16 @@ public class LoginController {
 		User member = loginRepository.findById(user.getEmpId())
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
 		
+		System.out.println("===========================");
 		System.out.println(member);
+		System.out.println(member.getRoles());
+		System.out.println("===========================");
 //        if (!passwordEncoder.matches(user.getPassword(), member.getPassword())) {
 //            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
 //        }
         
 		List<Authority> roles = member.getRoles();
+		System.out.println(roles);
         
         return jwtTokenProvider.createToken(member.getEmpId()+"", roles);
 		

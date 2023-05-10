@@ -35,6 +35,7 @@ function App() {
     ) 
   }
   
+  console.log(localStorage.getItem('Role'))
   return (
     <BrowserRouter>
       <Routes>

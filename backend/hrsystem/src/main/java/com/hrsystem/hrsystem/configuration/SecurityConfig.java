@@ -21,21 +21,23 @@ public class SecurityConfig  {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable();
         http
-                .authorizeRequests(requests -> requests
-                        .antMatchers("/user/**").authenticated()
-                        .antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
-                        .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                        .anyRequest().permitAll())
-                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+        .authorizeRequests()
+            .antMatchers("/user/**").authenticated()
+            .antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
+            .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+            .anyRequest().permitAll()
+            .and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
     
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
     
