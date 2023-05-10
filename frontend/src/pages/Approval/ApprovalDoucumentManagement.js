@@ -17,8 +17,12 @@ function ApprovalDoucumentManagement() {
                         ]
 
     const userRoleList = localStorage.getItem("Role");
-    const match = useMatch("/:approval/approvalDocument/:documentType").params.documentType;
+    const match = useMatch("/:approval/approvalDocument/:documentType");
 
+    let param = "";
+    if(match){
+        param = match.params.documentType;
+    }
 
     return (
         <div className="approvalParentBox">
@@ -46,9 +50,10 @@ function ApprovalDoucumentManagement() {
                 
             <div className='approvalMainContent'>
 
-            {match && 
-                    match === "attendance" ? <Attendance /> : match === "outside" ? <Outside/> 
-                    : match === "education" ? <Education/> : match === "retirement" ? <Retirement/> : <LeaveOfAbsence/>}
+            {param && 
+                    param === "attendance" ? <Attendance /> : param === "outside" ? <Outside/> 
+                    : param === "education" ? <Education/> : param === "retirement" ? <Retirement/> 
+                    : param === "leaveOfAbsence" ? <LeaveOfAbsence/> : <Attendance/> }
 
             </div>
         </div>
