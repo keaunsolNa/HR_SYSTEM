@@ -9,7 +9,6 @@ function TokenCheck() {
     
     const dispatch = useDispatch();
 
-    console.log(userId)
     const [jwtAuthToken] = useState(
         {
             jwtAuthToken: localStorage.getItem("jwtAuthToken"),

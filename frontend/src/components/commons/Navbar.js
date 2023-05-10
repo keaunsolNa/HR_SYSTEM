@@ -12,7 +12,7 @@ function Navbar() {
     const selectValue = [<EmployManagement/>, <ApprovalManagement/>, <PayManagement/>, <AuthorityManagement/>, <SystemManagement/>];
     const menuName = ['계정 관리', '결재 관리', '급여 관리', '권한 관리', '시스템 관리']
     const newArr = Array(selectValue.length).fill(false);
-    
+ 
     const topViewClick = (idx) => {
         newArr[idx] = true;
         setIsRootSelect(newArr);
@@ -24,7 +24,7 @@ function Navbar() {
     }
  
     return (
-        <div>
+        <div className='navbarDiv'>
 
             {selectValue.map((element, index) => {
                 return (

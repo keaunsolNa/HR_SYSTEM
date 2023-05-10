@@ -8,16 +8,16 @@ function Header() {
     const dispatch = useDispatch();
 
     const logoutHandler = () => {
-        localStorage.removeItem('isLogin');
-        localStorage.removeItem('jwtAuthToken');
+        localStorage.clear();
         dispatch(resetLoginUser());
+        
         alert('로그아웃')
         window.location.replace("/");
     }
 
     return (
         <>
-            <div className='HeaderLogo'>
+            <div className='Header'>
                 <NavLink to='/'>
                     <>
                         <div className='inline-block'>
@@ -25,15 +25,11 @@ function Header() {
                         </div>
                         <div className='inline-block vertical-align'>
                             <h3>HR-인사시스템</h3>
-                        </div>
 
-                        { !loginStatus ? 
-                            (
-                                <NavLink to='user/login'>로그인</NavLink>
-                            ) : (
-                                <h5 onClick={ logoutHandler }> <NavLink to='user/login'>로그아웃</NavLink></h5>
-                            )
-                        }
+                            { !loginStatus ? 
+                                (<NavLink to='user/login' className='isLogin'>로그인</NavLink>) : <h5 onClick={ logoutHandler }> <NavLink to='user/login'>로그아웃</NavLink></h5>
+                            }
+                        </div>
                     </>
                 </NavLink>
             </div>

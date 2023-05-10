@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 public class ErrorConfig {
 
     @Bean
-    public ConfigurableServletWebServerFactory webServerFactory() {
+    ConfigurableServletWebServerFactory webServerFactory() {
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
         factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error"));
         return factory;

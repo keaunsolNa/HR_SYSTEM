@@ -1,23 +1,37 @@
 import { request } from "./Api"; 
 import { login, getLoginUser } from "../modules/userModules/UserLoginModule";
 
+import jwt_decode from 'jwt-decode';
+
 /* 로그인 함수  */
 export function callLoginAPI(loginInfo) {
     
     /* redux-thunk(미들 웨어)를 이용한 비동기 처리 */
     return async (dispatch, getState) => {
         
-        console.log(loginInfo)
-
         /* Api의 axios 처리 참조  */
-        const userList = await request('POST', `/api/userlogin/userCheck`, loginInfo);
+        const token = await request('POST', `/api/userlogin/userCheck`, loginInfo);
 
-        if(userList !== '' && userList !== undefined) {
+        if(token) {
 
             dispatch(login(true));
-            localStorage.jwtAuthToken = userList;
+            localStorage.jwtAuthToken = token;
+
+            const decodedToken = jwt_decode(token);
+            const userRole = decodedToken.roles;
+
+            let array = [];
+            
+            userRole.map(function(role){
+                array.push(role.authorityName)
+            })
+            
+            localStorage.setItem("Role", JSON.stringify(array));
+
         } else {
+
             dispatch(login(false));
+
         }
 
     }
@@ -27,6 +41,12 @@ export function callLoginAPI(loginInfo) {
 export function callGetUserId(token) {
 
     return async (dispatch, getState) => {
+
+        if(token === null || token === undefined) {
+            alert('인증 토큰이 없습니다. 다시 로그인 해 주세요.');
+            localStorage.clear();
+            window.location.replace("/");
+        }
 
         const userId = await request('POST', '/api/userlogin/getLoginUser', token);
 

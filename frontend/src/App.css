@@ -1,7 +1,63 @@
+a {
+  text-decoration-line: none;
+  color: black;
+}
+
+.Header {
+  background-color: #7f75d3;
+}
+
+.BottomLogo {
+  clear: both;
+  background-color: #7f75d3;
+  position: relative;
+}
+
+.BottomLogo h3 {
+  color: white;
+}
+
+.HeaderLogo h3 {
+  color: white;
+}
+
+.navbarDiv {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px none;
+  height: auto;
+  
+}
+
+.approvalParentBox {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.approvalSideVar{
+  float: left;
+  border: 1px solid black;
+  margin-right: 20px;
+
+}
+
+.approvalMainContent {
+  display:inline-block;
+  margin-bottom: 50px;
+}
+
+.isLogin {
+  color: white;
+  text-decoration-line: none;
+  cursor: pointer;
+}
+
 .TopNav {
   list-style-type : none;
   display: inline-block;
   margin-left: 10%;
+
 }
 
 .MiddleNav {
@@ -12,6 +68,7 @@
 
 .BottomNav {
   margin-top: 10%;
+  position: relative;
 }
 
 .BottomLine {
@@ -23,6 +80,7 @@
 .titleH {
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .MainBox {
@@ -47,16 +105,21 @@
 }
 
 .commonForm {
+  font-family: Arial, Helvetica, sans-serif;
   font-size: '24px';
-  text-align: 'center';
+  margin: 25px;
+  position: relative;
 }
 
-.commonForm > label {
-  margin-left: 37%;
+.commonFormChild {
+  position: relative;
+  top: 30%;
+  left: 42%;
+  margin-bottom: 10px; 
+  clear: both;
 }
 
-.commonForm > button {
-
+.commonBtn {
   background-color: #7fb1bf;
   border: 0;
   padding: 6px 15px;

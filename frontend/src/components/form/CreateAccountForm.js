@@ -54,75 +54,76 @@ function CreateAccount() {
 
     return (
         <div className='commonForm'>
-
-            <label>사원 이름 : </label>
-            <input type="text" name="empName" value={ registUser.empName } onChange={ onChangeHandler }/>
-            <br/>
-            <br/>
-            <label>입사 구분 : </label>
-            <select name="hireCd" value={ registUser.hireCd } onChange={ onChangeHandler }>
-                <option>정규직신입</option>
-                <option>정규직경력</option>
-                <option>인턴</option>
-                <option>계약직</option>
-                <option>외부 파견 인재</option>
-            </select>
-            <br/>
-            <br/>
-            <label>부서 : </label>
-            <select name="orgCd" value={ registUser.orgCd } onChange={ onChangeHandler }>
-                <option>사업1부</option>
-                <option>사업2부</option>
-                <option>사업3부</option>
-                <option>사업4부</option>
-                <option>사업5부</option>
-            </select>
-            <br/>
-            <br/>
-            <label>직위 : </label>
-            <select name="posCd" value={ registUser.posCd } onChange={ onChangeHandler }>
-                <option>외부인원</option>
-                <option>인턴</option>
-                <option>계약직</option>
-                <option>사원</option>
-                <option>대리</option>
-                <option>과장</option>
-                <option>차장</option>
-                <option>부장</option>
-                <option>이사</option>
-                <option>상무</option>
-                <option>전무</option>
-                <option>부사장</option>
-                <option>사장</option>
-            </select>
-            <br/>
-            <br/>
-            <label>직원구분코드 : </label>
-            <select name="empKindCd" value={ registUser.empKindCd } onChange={ onChangeHandler }>
-                <option>외부인원</option>
-                <option>내부인원</option>
-            </select>
-            <br/>
-            <br/>
-            <label> 직무코드 : </label>
-            <select name="jobCd" value={ registUser.jobCd } onChange={ onChangeHandler }>
-                <option>사원</option>
-                <option>보안담당자</option>
-                <option>인사담당자</option>
-                <option>재정담당자</option>
-                <option>사장</option>
-            </select>
-            <br/>
-            <br/>
-            <label>성별 : </label>
-            <select name="genderCd" value={ registUser.genderCd } onChange={ onChangeHandler }>
-                <option>남성</option>
-                <option>여성</option>
-            </select>
-            <br/>
-            <br/>
-            <label> 신규 사원 아이디 생성 : </label>
-            <button onClick={ onClickHandler }>Click </button>
+            <div className='commonFormChild'> 
+                <label>사원 이름 : </label>
+                <input type="text" name="empName" value={ registUser.empName } onChange={ onChangeHandler }/>
+                <br/>
+                <br/>
+                <label>입사 구분 : </label>
+                <select name="hireCd" value={ registUser.hireCd } onChange={ onChangeHandler }>
+                    <option>정규직신입</option>
+                    <option>정규직경력</option>
+                    <option>인턴</option>
+                    <option>계약직</option>
+                    <option>외부 파견 인재</option>
+                </select>
+                <br/>
+                <br/>
+                <label>부서 : </label>
+                <select name="orgCd" value={ registUser.orgCd } onChange={ onChangeHandler }>
+                    <option>사업1부</option>
+                    <option>사업2부</option>
+                    <option>사업3부</option>
+                    <option>사업4부</option>
+                    <option>사업5부</option>
+                </select>
+                <br/>
+                <br/>
+                <label>직위 : </label>
+                <select name="posCd" value={ registUser.posCd } onChange={ onChangeHandler }>
+                    <option>외부인원</option>
+                    <option>인턴</option>
+                    <option>계약직</option>
+                    <option>사원</option>
+                    <option>대리</option>
+                    <option>과장</option>
+                    <option>차장</option>
+                    <option>부장</option>
+                    <option>이사</option>
+                    <option>상무</option>
+                    <option>전무</option>
+                    <option>부사장</option>
+                    <option>사장</option>
+                </select>
+                <br/>
+                <br/>
+                <label>직원구분코드 : </label>
+                <select name="empKindCd" value={ registUser.empKindCd } onChange={ onChangeHandler }>
+                    <option>외부인원</option>
+                    <option>내부인원</option>
+                </select>
+                <br/>
+                <br/>
+                <label> 직무코드 : </label>
+                <select name="jobCd" value={ registUser.jobCd } onChange={ onChangeHandler }>
+                    <option>사원</option>
+                    <option>보안담당자</option>
+                    <option>인사담당자</option>
+                    <option>재정담당자</option>
+                    <option>사장</option>
+                </select>
+                <br/>
+                <br/>
+                <label>성별 : </label>
+                <select name="genderCd" value={ registUser.genderCd } onChange={ onChangeHandler }>
+                    <option>남성</option>
+                    <option>여성</option>
+                </select>
+                <br/>
+                <br/>
+                <label> 신규 사원 아이디 생성 : </label>
+                <button onClick={ onClickHandler } className="commonBtn">Click </button>
+            </div>
         </div>
     );
 }

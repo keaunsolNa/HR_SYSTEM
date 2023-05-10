@@ -52,7 +52,6 @@ function TempAccountList() {
         []
     );
     
-    console.log(userList)
     return (
         userList && (
             <div className='MainBox'>
