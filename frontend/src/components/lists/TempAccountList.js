@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { searchTempUser } from "../../api/AccountAPICalls";
 import Board from "../Table/Employee/Board"
-import UserItem from '../../components/items/userItem';
+import { combineActions } from 'redux-actions';
 
 function TempAccountList() {
     const result = useSelector(state => state.accountReducer);
@@ -51,7 +51,7 @@ function TempAccountList() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         []
     );
-    
+
     return (
         userList && (
             <div className='MainBox'>
@@ -60,7 +60,7 @@ function TempAccountList() {
                     <input type="text" name="empName" value={ searchValue.empName } onChange={ onChangeHandler }/>
                 </div>
                 <div className='Table'>
-                    <Board info={userList.map(emp => <UserItem key={ emp.empId } emp={ emp }/>) } />
+                    <Board info={userList.map(emp => <Board key={ emp.empId } emp={ emp }/>) } />
                 </div>
             </div>
         )

@@ -10,12 +10,18 @@ a :hover {
 
 .Header {
   background-color: #7f75d3;
+  text-align: center;
+}
+
+.Logout {
+  text-align: right;
 }
 
 .BottomLogo {
   clear: both;
   background-color: #7f75d3;
   position: relative;
+  text-align: center;
 }
 
 .BottomLogo h3 {
@@ -31,6 +37,7 @@ a :hover {
   margin-bottom: 10px;
   border: 1px none;
   height: auto;
+  background-color:#7fb1bf;
   
 }
 
@@ -56,6 +63,15 @@ a :hover {
   color: white;
   text-decoration-line: none;
   cursor: pointer;
+}
+
+.approvalTitle {
+  clear: both;
+  text-align: center;
+}
+
+.approvalMain > * > * {
+  border: 1px solid black;
 }
 
 .TopNav {

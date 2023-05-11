@@ -56,14 +56,16 @@ public class UserServiceImpl implements UserService{
 
 	// 사원 정보 수정
 	@Override
-	public Optional<User> updateUser(EmpBase employee) {
+	public EmpBase updateUser(EmpBase employee) {
 
+		System.out.println("=================================================================");
+		System.out.println(employee.getTempYn());
 		if(employee.getTempYn().equals("Y")) employee.setTempYn("N");
 		
+		System.out.println(employee.getTempYn());
+
 		userRepositroy.save(employee);
 
-		Optional<User> updateUser = userRepositroy.findByEmpId(employee.getEmpId());
-		
-		return updateUser;
+		return employee;
 	}
 }

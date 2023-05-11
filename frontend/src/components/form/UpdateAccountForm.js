@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {  callUpdateUser } from "../../api/AccountAPICalls"
+import { callUpdateUser } from "../../api/AccountAPICalls"
+import { passwordChager } from "./PasswordChanger"
 
 function UpdateAccountForm({ data }) {
 
@@ -119,7 +120,15 @@ function UpdateAccountForm({ data }) {
             return false;
         }
 
+        if(registUser.ctzNo.match(ctzNoRegex) === null) {
+            alert('주민번호를 확인 해 주세요')
+            return false;
+        }
+
         return true;
+    }
+
+    const onClickHandlerPassword =() => {
     }
 
     useEffect(() => {
@@ -130,6 +139,10 @@ function UpdateAccountForm({ data }) {
     return (
         registUser && (
             <div className='commonForm'>
+                <div>
+                    <label> 비밀번호 변경 : </label>
+                    <button onClick={ onClickHandlerPassword } className="commonBtn">Click </button>
+                </div>
                 <div> 
                     <label> 사원 아이디 : </label>
                     <input type="text" name="empId" value={ registUser.empId || '' } onChange={ onChangeHandler } readOnly={ !!registUser.empNo } />

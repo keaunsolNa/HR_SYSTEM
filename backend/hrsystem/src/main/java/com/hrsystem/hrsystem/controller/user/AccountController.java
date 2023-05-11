@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,22 +31,24 @@ public class AccountController {
 
 	private final UserService userService;
 	private final JwtTokenProvider jwtTokenProvider;
+	private final PasswordEncoder passwordEncoder;
 	
 	// 임시 계정 생성
 	@PostMapping("/createTempUser")
 	public EmpBase adminModifyEmployee(@RequestBody EmpBase request) {
 		
-		System.out.println(request);
 		EmpBase employee = ParseInput.parseEmp(request);
 		
-		System.out.println(employee);
 		long seq = userService.selectSeqNumber();
 		long currentYear = Year.now().getValue();
 		
 		long Id = Long.parseLong(currentYear + "" + seq);
 		employee.setEmpId(Id);
 		
-		String password = RandomPasswordGenerator.generateRandomString(6);
+		String password = passwordEncoder.encode(request.getPassword());
+		
+		System.out.println(password);
+		
 		employee.setPassword(password);
 
 		// 추후 세션에서 CompanyCd 받아오기
@@ -66,7 +69,6 @@ public class AccountController {
 		
 		employee = userService.createAccount(employee);
 		
-		System.out.println(employee);
 		return request;
 	};
 
@@ -93,18 +95,18 @@ public class AccountController {
 		
 		Optional<EmpBase> employee = userService.getUser(userId);
 		
-		System.out.println(employee);
-		
 		return employee;
 	}
 	
+	// 계정 정보 변경
 	@PostMapping("updateUser") 
-	public Optional<User> updateUser(@RequestBody EmpBase employee) {
+	public EmpBase updateUser(@RequestBody EmpBase employee) {
 		
-		System.out.println(employee);
+		employee.setPassword(passwordEncoder.encode(employee.getPassword()));
 		
-		Optional<User> updateEmployee = userService.updateUser(employee);
+		EmpBase updateEmployee = userService.updateUser(employee);
 		
+		System.out.println(updateEmployee);
 		return updateEmployee;
 		
 	}

@@ -10,6 +10,7 @@ function CreateAccount() {
     const [registUser, setRegistUser] = useState(
         {
             empName: '',
+            password: '',
             hireCd: '정규직신입',
             posGrdCd: '사원',
             orgCd: '사업1부',
@@ -40,7 +41,7 @@ function CreateAccount() {
             /* 메뉴 등록 완료 확인 후 /menu로 이동 */
            
             if(result.regist) {
-                alert(`등록 사원의 ID 는 '${result.regist.empId}' 임시 패스워드는 '${result.regist.password}' 입니다.` )
+                alert(`등록 사원의 ID 는 '${result.regist.empId}' 입니다.` )
             }
             
         },
@@ -54,11 +55,15 @@ function CreateAccount() {
 
     return (
         <div className='commonForm'>
-            <div className='commonFormChild'> 
+            <div> 
                 <label>사원 이름 : </label>
                 <input type="text" name="empName" value={ registUser.empName } onChange={ onChangeHandler }/>
-                <br/>
-                <br/>
+            </div>
+            <div> 
+                <label>임시 비밀번호 : </label>
+                <input type="password" name="password" value={ registUser.password } onChange={ onChangeHandler }/>
+            </div>
+            <div>
                 <label>입사 구분 : </label>
                 <select name="hireCd" value={ registUser.hireCd } onChange={ onChangeHandler }>
                     <option>정규직신입</option>
@@ -67,8 +72,8 @@ function CreateAccount() {
                     <option>계약직</option>
                     <option>외부 파견 인재</option>
                 </select>
-                <br/>
-                <br/>
+            </div>
+            <div>
                 <label>부서 : </label>
                 <select name="orgCd" value={ registUser.orgCd } onChange={ onChangeHandler }>
                     <option>사업1부</option>
@@ -77,8 +82,8 @@ function CreateAccount() {
                     <option>사업4부</option>
                     <option>사업5부</option>
                 </select>
-                <br/>
-                <br/>
+            </div>
+            <div>
                 <label>직위 : </label>
                 <select name="posCd" value={ registUser.posCd } onChange={ onChangeHandler }>
                     <option>외부인원</option>
@@ -95,15 +100,15 @@ function CreateAccount() {
                     <option>부사장</option>
                     <option>사장</option>
                 </select>
-                <br/>
-                <br/>
+            </div>
+            <div>
                 <label>직원구분코드 : </label>
                 <select name="empKindCd" value={ registUser.empKindCd } onChange={ onChangeHandler }>
                     <option>외부인원</option>
                     <option>내부인원</option>
                 </select>
-                <br/>
-                <br/>
+            </div>
+            <div>
                 <label> 직무코드 : </label>
                 <select name="jobCd" value={ registUser.jobCd } onChange={ onChangeHandler }>
                     <option>사원</option>
@@ -112,16 +117,16 @@ function CreateAccount() {
                     <option>재정담당자</option>
                     <option>사장</option>
                 </select>
-                <br/>
-                <br/>
+            </div>
+            <div>
                 <label>성별 : </label>
                 <select name="genderCd" value={ registUser.genderCd } onChange={ onChangeHandler }>
                     <option>남성</option>
                     <option>여성</option>
                 </select>
-                <br/>
-                <br/>
-                <label> 신규 사원 아이디 생성 : </label>
+            </div>
+            <div>
+                <label> 제출 : </label>
                 <button onClick={ onClickHandler } className="commonBtn">Click </button>
             </div>
         </div>

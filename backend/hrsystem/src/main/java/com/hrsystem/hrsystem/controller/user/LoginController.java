@@ -30,29 +30,25 @@ public class LoginController {
 	private final LoginRepository loginRepository;
 	private final UserService userService;
 	
-	
-    
+    // 로그인
 	@PostMapping("/userCheck")
 	public String login(@RequestBody EmpBase user) {
 		
 		User member = loginRepository.findById(user.getEmpId())
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
 		
-		System.out.println("===========================");
-		System.out.println(member);
-		System.out.println(member.getRoles());
-		System.out.println("===========================");
-//        if (!passwordEncoder.matches(user.getPassword(), member.getPassword())) {
-//            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
-//        }
+        if (!passwordEncoder.matches(user.getPassword(), member.getPassword())) {
+            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        }
         
-		List<Authority> roles = member.getRoles();
-		System.out.println(roles);
-        
+        List<Authority> roles = member.getRoles();
+        System.out.println(roles);
+
         return jwtTokenProvider.createToken(member.getEmpId()+"", roles);
 		
 	}
 	
+	// 토큰 정보로 유저 객체 가져오기
 	@PostMapping("getLoginUser") 
 	public Object getUserId(@RequestBody String token) {
 

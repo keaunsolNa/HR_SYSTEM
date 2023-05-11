@@ -1,4 +1,7 @@
 import { NavLink, useMatch } from 'react-router-dom';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { callGetUserId } from "../../api/UserAPICalls";
 
 import Attendance from './document/Attendance';
 import Education from './document/Education';
@@ -7,6 +10,19 @@ import Retirement from './document/Retirement';
 import LeaveOfAbsence from './document/LeaveOfAbsence';
 
 function ApprovalDoucumentManagement() {
+
+    const userId = localStorage.getItem('jwtAuthToken');
+
+    const dispatch = useDispatch();
+
+    useEffect(
+        () => {
+
+            dispatch(callGetUserId(userId));
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        []
+    );
 
     const selectValue = [
                             { id: 1, text: "근태 신청서", path: "/approval/approvalDocument/attendance", role:"ROLE_EMPLOYEE"},
@@ -31,7 +47,7 @@ function ApprovalDoucumentManagement() {
                 {selectValue.map((link) => {
                     const { id, text, path, role } = link;
 
-                    if(userRoleList.indexOf({role}.role) === -1) {
+                    if(userRoleList !== null && userRoleList.indexOf({role}.role) === -1) {
                         return <div key={id}></div>
                     }
                     

@@ -12,7 +12,12 @@ export function callLoginAPI(loginInfo) {
         /* Api의 axios 처리 참조  */
         const token = await request('POST', `/api/userlogin/userCheck`, loginInfo);
 
+
         if(token) {
+
+            if(token === "임시 계정") {
+                alert('현재 임시 계정인 상태입니다. 사원 정보를 먼저 갱신 해 주세요.')
+            }
 
             dispatch(login(true));
             localStorage.jwtAuthToken = token;

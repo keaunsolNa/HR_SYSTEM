@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { resetLoginUser } from "../../modules/userModules/UserLoginModule";
-import logo from "../../asserts/Linux.png"
+
 function Header() {
 
     const loginStatus = !!localStorage.getItem('isLogin');
@@ -20,11 +20,8 @@ function Header() {
             <div className='Header'>
                 <NavLink to='/'>
                     <>
-                        <div className='inline-block'>
-                            <img src={logo} alt=""></img> 
-                        </div>
-                        <div className='inline-block vertical-align'>
-                            <h3>HR-인사시스템</h3>
+                        <h3>HR-인사시스템</h3>
+                        <div className='Logout'>
 
                             { !loginStatus ? 
                                 (<NavLink to='user/login' className='isLogin'>로그인</NavLink>) : <h5 onClick={ logoutHandler }> <NavLink to='user/login'>로그아웃</NavLink></h5>
