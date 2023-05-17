@@ -10,7 +10,7 @@ function CreateAccount() {
     const [registUser, setRegistUser] = useState(
         {
             empName: '',
-            password: '',
+            userPassword: '',
             hireCd: '정규직신입',
             posGrdCd: '사원',
             orgCd: '사업1부',
@@ -61,7 +61,7 @@ function CreateAccount() {
             </div>
             <div> 
                 <label>임시 비밀번호 : </label>
-                <input type="password" name="password" value={ registUser.password } onChange={ onChangeHandler }/>
+                <input type="password" name="userPassword" value={ registUser.userPassword } onChange={ onChangeHandler }/>
             </div>
             <div>
                 <label>입사 구분 : </label>

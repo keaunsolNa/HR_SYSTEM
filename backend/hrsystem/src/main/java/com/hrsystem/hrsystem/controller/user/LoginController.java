@@ -34,6 +34,7 @@ public class LoginController {
 	@PostMapping("/userCheck")
 	public String login(@RequestBody EmpBase user) {
 		
+		System.out.println("로그인 요청 컨트롤러 ");
 		User member = loginRepository.findById(user.getEmpId())
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
 		

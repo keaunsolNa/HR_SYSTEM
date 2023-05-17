@@ -13,7 +13,7 @@ function LoginForm() {
     const [loginInfo, setLoginInfo] = useState(
         {
             empId : '',
-            password : ''
+            userPassword : ''
         }
     );
 
@@ -44,7 +44,7 @@ function LoginForm() {
                 setLoginInfo(
                     {
                         empId : '',
-                        password : ''
+                        userPassword : ''
                     }
                 );
                 dispatch(resetLoginUser());    
@@ -64,7 +64,7 @@ function LoginForm() {
                     <label>ID : </label>
                     <input type="text" name="empId" value={ loginInfo.empId } onChange={ onChangeHandler }/> &nbsp;&nbsp;&nbsp;
                     <label>PASSWORD : </label>
-                    <input type="password" name="password" value={ loginInfo.password } onChange={ onChangeHandler }/>
+                    <input type="password" name="userPassword" value={ loginInfo.userPassword } onChange={ onChangeHandler }/>
                     <button onClick={ onClickHandler }>로그인</button>
                 </div>
             </>

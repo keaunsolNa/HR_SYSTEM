@@ -11,7 +11,7 @@ const Td = ({item}) => {
                 <td>{item.empName}</td>
                 <td>{gender}</td>
                 <td>{hireCd}</td>
-                <td>{item.password}</td>
+                <td>{item.userPassword}</td>
             </tr>
         </>
     )

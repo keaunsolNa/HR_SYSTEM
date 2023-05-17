@@ -10,6 +10,8 @@ export function callLoginAPI(loginInfo) {
     return async (dispatch, getState) => {
         
         /* Api의 axios 처리 참조  */
+
+        console.log(loginInfo)
         const token = await request('POST', `/api/userlogin/userCheck`, loginInfo);
 
 

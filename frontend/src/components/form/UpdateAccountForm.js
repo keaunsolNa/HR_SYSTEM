@@ -12,7 +12,7 @@ function UpdateAccountForm({ data }) {
 
     const  [registUser, setRegistUser] = useState ( {
         empId: '',
-        password: '',
+        userPassword: '',
         password2: '',
         checkPassword: '',
         birthYmd: '',
@@ -52,16 +52,16 @@ function UpdateAccountForm({ data }) {
 
     const passwordCheck = () => {
 
-        const { password, password2 } = registUser;
+        const { userPassword, password2 } = registUser;
 
-        if(password.match(passwordRegEx) === null) {
+        if(userPassword.match(passwordRegEx) === null) {
             setRegistUser({
                 ...registUser,
                 checkPassword: '❌비밀번호는 숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요! ❌',
             })
         }
 
-        else if (password === password2) {
+        else if (userPassword === password2) {
             setRegistUser({
                 ...registUser,
                 checkPassword: '✅일치 ✅',
@@ -149,7 +149,7 @@ function UpdateAccountForm({ data }) {
                 </div>
                 <div>
                     <label> 비밀 번호 : </label>
-                    <input type="password" name="password" value={ registUser.password || ''} onChange={ onChangeHandler } onKeyDown={ passwordCheck} />
+                    <input type="password" name="userPassword" value={ registUser.userPassword || ''} onChange={ onChangeHandler } onKeyDown={ passwordCheck} />
                 </div>
                 <div>
                     <label> 비밀 번호 확인 : </label>
