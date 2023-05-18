@@ -11,9 +11,7 @@ export function callLoginAPI(loginInfo) {
         
         /* Api의 axios 처리 참조  */
 
-        console.log(loginInfo)
         const token = await request('POST', `/api/userlogin/userCheck`, loginInfo);
-
 
         if(token) {
 
@@ -25,14 +23,19 @@ export function callLoginAPI(loginInfo) {
             localStorage.jwtAuthToken = token;
 
             const decodedToken = jwt_decode(token);
+
+            console.log(decodedToken)
             const userRole = decodedToken.roles;
 
+            console.log(userRole)
             let array = [];
             
             userRole.map(function(role){
-                array.push(role.authorityName)
+                array.push(role)
             })
             
+            console.log(array)
+
             localStorage.setItem("Role", JSON.stringify(array));
 
         } else {
@@ -57,6 +60,7 @@ export function callGetUserId(token) {
 
         const userId = await request('POST', '/api/userlogin/getLoginUser', token);
 
+        console.log(userId)
         if(userId.hasOwnProperty('ERROR')) {
             alert(userId.ERROR);
             localStorage.clear();
